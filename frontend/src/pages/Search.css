@@ -1,0 +1,280 @@
+/* Search.css – Stilim i plotë për faqen e kërkimit dhe komponentët e lidhur */
+
+/* Container kryesor */
+.search-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+  padding: 2rem;
+}
+
+/* Titulli */
+.search-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  margin-top: 5rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  letter-spacing: -0.5px;
+}
+
+/* Tabs */
+.search-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #374151;
+  padding-bottom: 0.5rem;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 2rem;
+}
+
+.tab-btn.active {
+  background: #3b82f6;
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+.tab-btn:hover:not(.active) {
+  color: white;
+  background: #374151;
+}
+
+/* Paneli i ngarkimit të fotove */
+.upload-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-box {
+  background: rgba(31, 41, 55, 0.8);
+  backdrop-filter: blur(8px);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+}
+
+.file-input {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background: #111827;
+  border: 2px dashed #4b5563;
+  border-radius: 1rem;
+  color: #e5e7eb;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.file-input:hover {
+  border-color: #3b82f6;
+  background: #1f2937;
+}
+
+.file-input::file-selector-button {
+  background: #3b82f6;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  color: white;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.search-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  border: none;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 2rem;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+.search-btn:hover:not(:disabled) {
+  transform: scale(1.01);
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.search-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.2);
+  border-left: 4px solid #ef4444;
+  padding: 0.8rem;
+  border-radius: 0.75rem;
+  margin-top: 1rem;
+  color: #fecaca;
+}
+
+.results-container {
+  margin-top: 1.5rem;
+  animation: fadeInUp 0.4s ease;
+}
+
+.results-container h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  border-left: 4px solid #3b82f6;
+  padding-left: 0.8rem;
+  color: #f3f4f6;
+}
+
+.result-card {
+  background: #1f2937;
+  border-radius: 1rem;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid #374151;
+  transition: 0.1s;
+}
+
+.result-card:hover {
+  background: #2d3a4e;
+  transform: translateX(6px);
+  border-color: #3b82f6;
+}
+
+.result-card p {
+  margin: 0.2rem 0;
+  color: #e5e7eb;
+}
+
+.result-card strong {
+  color: #93c5fd;
+}
+
+.no-results {
+  text-align: center;
+  padding: 2rem;
+  background: #1f2937;
+  border-radius: 1rem;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Animacion */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Përgjegjshmëri */
+@media (max-width: 640px) {
+  .search-page {
+    padding: 1rem;
+  }
+  .search-title {
+    font-size: 1.5rem;
+  }
+  .upload-box {
+    padding: 1rem;
+  }
+}
+.badge-alert {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-top: 0.3rem;
+}
+
+.badge-alert.reviewed {
+  background: #10b981;
+  color: white;
+}
+
+.badge-alert.unreviewed {
+  background: #ef4444;
+  color: white;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; background: #f97316; }
+  100% { opacity: 0.7; }
+}
+.badge-alert {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-top: 0.3rem;
+}
+
+.badge-alert.reviewed {
+  background: #10b981;
+  color: white;
+}
+
+.badge-alert.unreviewed {
+  background: #ef4444;
+  color: white;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; background: #f97316; }
+  100% { opacity: 0.7; }
+}
+.query-metadata {
+  background: #1f2937;
+  border-radius: 1rem;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #f59e0b;
+}
+.query-metadata h4 {
+  margin: 0 0 0.5rem 0;
+  color: #fbbf24;
+}
+.query-metadata p {
+  margin: 0.2rem 0;
+  color: #e5e7eb;
+}
+.query-metadata .warning {
+  color: #f87171;
+  margin-top: 0.5rem;
+}
+.non-human-message {
+  background: #fff3cd;
+  border: 1px solid #ffeeba;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}

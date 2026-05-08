@@ -1,0 +1,109 @@
+.profile-page {
+  padding: 100px 20px 20px;
+  min-height: 100vh;
+  background: #111827;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.profile-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  
+}
+.profile-box {
+  background: #1f2937;
+  max-width: 500px;
+  padding: 80px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  
+}
+
+/* INFO */
+.info {
+  margin-bottom: 12px;
+  width: 500px;
+}
+
+.info label {
+  display: block;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.info p {
+  background: #374151;
+  padding: 8px;
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+.role {
+  text-transform: capitalize;
+}
+
+/* LINE */
+.line {
+  border: 1px solid #374151;
+  margin: 20px 0;
+}
+
+/* SUBTITLE */
+.subtitle {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+/* FORM */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* INPUT */
+.input {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #374151;
+  color: white;
+  outline: none;
+}
+
+/* BUTTON */
+.btn {
+  background: #2563eb;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #1d4ed8;
+}
+
+/* MESSAGES */
+.success {
+  color: #22c55e;
+  font-size: 13px;
+}
+
+.error {
+  color: #ef4444;
+  font-size: 13px;
+}
+
+/* LOADING */
+.loading {
+  text-align: center;
+  margin-top: 50px;
+  color: white;
+}
