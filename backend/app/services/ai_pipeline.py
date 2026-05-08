@@ -8,6 +8,7 @@ from app.db.database import SessionLocal
 from app.models.gallery import Gallery
 from app.services.age_gender import analyze_age_gender
 from app.services.denoising import denoise_image
+import face_recognition
 
 # ------------------------------
 # Zbulim i thjeshtë i fytyrës me HAAR Cascade

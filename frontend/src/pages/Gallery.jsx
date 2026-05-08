@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { getGallery, createGalleryItem, deleteGalleryItem } from '../services/galleryService';
 import { createManualAlert } from '../services/alertsService';
 import './Gallery.css';
@@ -11,6 +12,7 @@ const getGoogleMapsLink = (locationText) => {
 };
 
 export default function Gallery() {
+  const location = useLocation();
   const [items, setItems] = useState([]);
   const [name, setName] = useState('');
   const [file, setFile] = useState(null);
@@ -19,6 +21,10 @@ export default function Gallery() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [alertLoading, setAlertLoading] = useState({});
+  
+  // highlightedId llogaritet direkt nga location.state, jo si state i veçantë
+  const highlightedId = location.state?.highlightPersonId || null;
+  const hasScrolledRef = useRef(false);
 
   // State për të dhënat e reja
   const [idNumber, setIdNumber] = useState('');
@@ -42,6 +48,29 @@ export default function Gallery() {
     load();
   }, []);
 
+  // Efekt vetëm për skrolim dhe animacion - kjo është e pranueshme sepse
+  // është ndërveprim me DOM-in (sistem i jashtëm)
+  useEffect(() => {
+    if (highlightedId && items.length > 0 && !hasScrolledRef.current) {
+      hasScrolledRef.current = true;
+      
+      // Skrolo te kartela
+      setTimeout(() => {
+        const element = document.getElementById(`gallery-item-${highlightedId}`);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          element.classList.add('highlight-pulse');
+          setTimeout(() => {
+            element.classList.remove('highlight-pulse');
+          }, 2000);
+        }
+      }, 300);
+      
+      // Pastro state-in e lokacionit për të mos e theksuar përsëri në rifreskim
+      window.history.replaceState({}, document.title);
+    }
+  }, [highlightedId, items]);
+
   const handleAdd = async () => {
     if (!name.trim()) return setError('Emri është obligativ');
     if (!file) return setError('Zgjidh foto');
@@ -53,7 +82,6 @@ export default function Gallery() {
     formData.append('status', status);
     formData.append('description', description);
     formData.append('file', file);
-    // Fushat e reja
     formData.append('id_number', idNumber);
     formData.append('phone', phone);
     formData.append('residence_location', residenceLocation);
@@ -102,7 +130,6 @@ export default function Gallery() {
       <h1 className="title">Galeria</h1>
       {error && <div className="error">{error}</div>}
 
-      {/* FORMULARI */}
       <div className="form-box">
         <input
           value={name}
@@ -115,7 +142,6 @@ export default function Gallery() {
           placeholder="Përshkrimi"
         />
 
-        {/* Fushat e reja */}
         <input
           value={idNumber}
           onChange={(e) => setIdNumber(e.target.value)}
@@ -170,10 +196,13 @@ export default function Gallery() {
         </button>
       </div>
 
-      {/* RRJETI I KARTELAVE */}
       <div className="grid">
         {items.map((item) => (
-          <div key={item.id} className="card">
+          <div 
+            key={item.id} 
+            id={`gallery-item-${item.id}`}
+            className={`card ${highlightedId === item.id ? 'highlighted' : ''}`}
+          >
             <img
               src={`http://localhost:8000/media/${item.image_path?.split('/').pop() || ''}`}
               alt={item.name}
@@ -183,7 +212,6 @@ export default function Gallery() {
               <h3>{item.name}</h3>
               <p>{item.description || 'Pa përshkrim'}</p>
 
-              {/* Shfaqja e të dhënave shtesë */}
               {item.id_number && (
                 <p><strong>🆔 Leternjoftimi:</strong> {item.id_number}</p>
               )}
@@ -191,7 +219,6 @@ export default function Gallery() {
                 <p><strong>📞 Telefoni:</strong> {item.phone}</p>
               )}
               
-              {/* Vendbanimi si link Google Maps */}
               {item.residence_location && (
                 <p>
                   <strong>🏠 Vendbanimi:</strong>{' '}
@@ -201,7 +228,6 @@ export default function Gallery() {
                 </p>
               )}
               
-              {/* Lokacioni i fotos si link Google Maps */}
               {item.photo_location && (
                 <p>
                   <strong>📍 Lokacioni i fotos:</strong>{' '}

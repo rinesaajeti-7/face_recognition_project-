@@ -1,10 +1,19 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';  // Shto këtë import
 import { searchImage } from '../services/searchService';
 import { getAlerts } from '../services/alertsService';
 import LiveSearch from './SearchLive';
 import './Search.css';
 
+// Helper: krijon link Google Maps nga teksti i vendndodhjes
+const getGoogleMapsLink = (locationText) => {
+  if (!locationText || locationText.trim() === '') return null;
+  const query = encodeURIComponent(locationText.trim());
+  return `https://www.google.com/maps/search/?api=1&query=${query}`;
+};
+
 export default function Search() {
+  const navigate = useNavigate();  // Shto këtë hook
   const [activeTab, setActiveTab] = useState('upload');
   const [file, setFile] = useState(null);
   const [result, setResult] = useState(null);
@@ -61,6 +70,12 @@ export default function Search() {
       : <span className="badge-alert unreviewed">⚠️ Alert i pa shqyrtuar</span>;
   };
 
+  // Funksioni për të naviguar te Galeria me ID-në e personit
+  const goToGalleryItem = (personId, personName) => {
+    // Navigon te galeria dhe kalon ID-në si state ose query parameter
+    navigate('/gallery', { state: { highlightPersonId: personId, personName: personName } });
+  };
+
   return (
     <div className="search-page">
       <h1 className="search-title">🔍 Kërkim i ri</h1>
@@ -100,15 +115,49 @@ export default function Search() {
                         <p className="no-results">😕 Nuk u gjet asnjë person i ngjashëm.</p>
                       ) : (
                         result.matches.map((match, idx) => (
-                          <div key={idx} className="result-card">
+                          <div 
+                            key={idx} 
+                            className="result-card"
+                            onClick={() => goToGalleryItem(match.person_id, match.name)}
+                            style={{ cursor: 'pointer' }}
+                          >
                             <div>
                               <p><strong>👤 Emri:</strong> {match.name}</p>
                               <p><strong>📊 Ngjashmëria:</strong> {(match.similarity * 100).toFixed(2)}%</p>
                               <p><strong>🆔 ID:</strong> {match.person_id}</p>
                               {match.id_number && <p><strong>🪪 Leternjoftimi:</strong> {match.id_number}</p>}
                               {match.phone && <p><strong>📞 Telefoni:</strong> {match.phone}</p>}
-                              {match.residence_location && <p><strong>🏠 Vendbanimi:</strong> {match.residence_location}</p>}
-                              {match.photo_location && <p><strong>📍 Lokacioni i fotos:</strong> {match.photo_location}</p>}
+                              
+                              {/* Vendbanimi si link Google Maps */}
+                              {match.residence_location && (
+                                <p>
+                                  <strong>🏠 Vendbanimi:</strong>{' '}
+                                  <a 
+                                    href={getGoogleMapsLink(match.residence_location)} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()} // Parandalon navigimin te galeria kur klikon linkun
+                                  >
+                                    {match.residence_location} 📍
+                                  </a>
+                                </p>
+                              )}
+                              
+                              {/* Lokacioni i fotos si link Google Maps */}
+                              {match.photo_location && (
+                                <p>
+                                  <strong>📍 Lokacioni i fotos:</strong>{' '}
+                                  <a 
+                                    href={getGoogleMapsLink(match.photo_location)} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()} // Parandalon navigimin te galeria kur klikon linkun
+                                  >
+                                    {match.photo_location} 🗺️
+                                  </a>
+                                </p>
+                              )}
+                              
                               {match.station_added && <p><strong>🏢 Shtuar nga:</strong> {match.station_added}</p>}
                               {match.birth_date && <p><strong>🎂 Datëlindja:</strong> {match.birth_date}</p>}
                               {match.additional_info && <p><strong>📝 Të dhëna shtesë:</strong> {match.additional_info}</p>}

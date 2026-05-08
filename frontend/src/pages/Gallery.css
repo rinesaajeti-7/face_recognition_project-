@@ -250,3 +250,45 @@ gap: 10px;
 .btn-delete:hover {
   background: #dc2626;
 }
+/* Efekti i theksimit për karton e zgjedhur */
+.card.highlighted {
+  animation: highlightBorder 0.5s ease-in-out;
+  border: 3px solid #ffc107 !important;
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.5) !important;
+  background-color: #fffef7 !important;
+  color: #111827 !important;
+}
+
+.highlight-pulse {
+  animation: pulse 0.6s ease-in-out 3;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 10px rgba(255, 193, 7, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+  }
+}
+
+@keyframes highlightBorder {
+  0% {
+    border-color: #ffc107;
+    border-width: 1px;
+  }
+  50% {
+    border-color: #ff9800;
+    border-width: 4px;
+  }
+  100% {
+    border-color: #ffc107;
+    border-width: 3px;
+  }
+}
