@@ -24,9 +24,7 @@ Një sistem i avancuar për njohjen e fytyrave, kërkimin e personave të zhduku
 - **Alarmet** për personat e kërkuar
 - **Profili i përdoruesit**
 - **Responsive design** me React
-
-https://github.com/rinesaajeti-7/face_recognition_project-.git
-
+- 
 # Në dosjen kryesore të projektit
 cd backend
 python3 -m venv venv
