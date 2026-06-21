@@ -1,13 +1,18 @@
+// frontend/src/pages/SearchLive.jsx (VERSIONI I PËRDITËSUAR)
 import { useRef, useState, useEffect } from 'react';
 import { searchImage } from '../services/searchService';
+import { useNavigate } from 'react-router-dom';
 
 export default function LiveSearch() {
   const videoRef = useRef(null);
+  const navigate = useNavigate();
   const [stream, setStream] = useState(null);
   const [results, setResults] = useState([]);
   const [isActive, setIsActive] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [snapshotResult, setSnapshotResult] = useState(null);
+  const [useDenoising, setUseDenoising] = useState(false);
+  const [alertShown, setAlertShown] = useState({});
   const intervalRef = useRef(null);
 
   const stopCamera = () => {
@@ -21,6 +26,8 @@ export default function LiveSearch() {
     }
     setIsActive(false);
     setSnapshotResult(null);
+    setResults([]);
+    setAlertShown({});
   };
 
   // Kap kornizën aktuale nga kamera dhe kthen FormData
@@ -46,6 +53,10 @@ export default function LiveSearch() {
         }
         const formData = new FormData();
         formData.append('file', blob, 'frame.jpg');
+        // Shto parametrin use_denoising nëse është aktiv
+        if (useDenoising) {
+          formData.append('use_denoising', 'true');
+        }
         resolve(formData);
       }, 'image/jpeg');
     });
@@ -70,9 +81,21 @@ export default function LiveSearch() {
     if (formData) {
       const matches = await analyzeFormData(formData);
       setResults(matches);
-      const highMatch = matches.find(m => m.similarity > 0.6);
-      if (highMatch) {
-        console.log(`🔔 Alert: ${highMatch.name} detected!`);
+      
+      // Kontrollo për ngjashmëri të lartë dhe shfaq alert
+      const highMatch = matches.find(m => m.similarity > 0.65);
+      if (highMatch && !alertShown[highMatch.person_id]) {
+        setAlertShown(prev => ({ ...prev, [highMatch.person_id]: true }));
+        
+        // Shfaq njoftim
+        if (Notification.permission === 'granted') {
+          new Notification(`🚨 ALERT: ${highMatch.name} detected!`, {
+            body: `Similarity: ${(highMatch.similarity * 100).toFixed(2)}%`,
+            icon: '/vite.svg'
+          });
+        }
+        
+        console.log(`🔔 ALERT: ${highMatch.name} detected!`);
       }
     }
   };
@@ -94,7 +117,14 @@ export default function LiveSearch() {
 
   const startCamera = async () => {
     try {
-      const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
+      // Kërko leje për njoftime
+      if (Notification.permission === 'default') {
+        Notification.requestPermission();
+      }
+      
+      const mediaStream = await navigator.mediaDevices.getUserMedia({ 
+        video: { width: { ideal: 640 }, height: { ideal: 480 } }
+      });
       setStream(mediaStream);
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
@@ -103,10 +133,15 @@ export default function LiveSearch() {
       setIsActive(true);
       // Fillon analizën automatike
       if (intervalRef.current) clearInterval(intervalRef.current);
-      intervalRef.current = setInterval(autoCaptureAndSearch, 2000);
+      intervalRef.current = setInterval(autoCaptureAndSearch, 3000); // Çdo 3 sekonda
     } catch (err) {
       console.error('Camera error:', err);
+      alert('Nuk mund të aksesohet kamera. Ju lutem kontrolloni lejet.');
     }
+  };
+
+  const goToGallery = (personId) => {
+    navigate('/gallery', { state: { highlightPersonId: personId } });
   };
 
   useEffect(() => {
@@ -115,40 +150,74 @@ export default function LiveSearch() {
 
   return (
     <div className="bg-gray-800 p-6 rounded-lg">
-      <div className="mb-4 flex gap-4 flex-wrap">
+      <div className="mb-4 flex gap-4 flex-wrap items-center">
         {!isActive ? (
-          <button onClick={startCamera} className="bg-green-600 px-4 py-2 rounded text-white">
+          <button onClick={startCamera} className="bg-green-600 px-4 py-2 rounded text-white hover:bg-green-700 transition">
             ▶️ Fillo kamerën live
           </button>
         ) : (
           <>
-            <button onClick={stopCamera} className="bg-red-600 px-4 py-2 rounded text-white">
+            <button onClick={stopCamera} className="bg-red-600 px-4 py-2 rounded text-white hover:bg-red-700 transition">
               ⏹️ Ndalo kamerën
             </button>
             <button
               onClick={takeManualPhoto}
               disabled={isAnalyzing}
-              className="bg-blue-600 px-4 py-2 rounded text-white disabled:opacity-50"
+              className="bg-blue-600 px-4 py-2 rounded text-white disabled:opacity-50 hover:bg-blue-700 transition"
             >
               {isAnalyzing ? '🔄 Duke analizuar...' : '📸 Bëj foto dhe analizo'}
             </button>
+            
+            {/* Toggle për Denoising */}
+            <label className="flex items-center gap-2 text-white cursor-pointer">
+              <input
+                type="checkbox"
+                checked={useDenoising}
+                onChange={(e) => setUseDenoising(e.target.checked)}
+                className="w-4 h-4"
+              />
+              <span className="text-sm">🔧 Përmirëso cilësinë (Denoising)</span>
+            </label>
           </>
         )}
       </div>
 
       <div className="flex flex-col md:flex-row gap-6">
         <div className="flex-1">
-          <video ref={videoRef} autoPlay playsInline muted className="w-full rounded-lg border border-gray-600 bg-black" />
-          {isActive && isAnalyzing && <p className="text-blue-400 mt-2 text-sm">🔄 Duke analizuar foton...</p>}
+          <video 
+            ref={videoRef} 
+            autoPlay 
+            playsInline 
+            muted 
+            className="w-full rounded-lg border border-gray-600 bg-black"
+          />
+          {isActive && isAnalyzing && (
+            <p className="text-blue-400 mt-2 text-sm animate-pulse">🔄 Duke analizuar foton...</p>
+          )}
+          {isActive && useDenoising && (
+            <p className="text-green-400 mt-2 text-sm">✅ Denoising aktiv - cilësia e fotove është e përmirësuar</p>
+          )}
         </div>
+        
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-white mb-3">🔄 Identifikime automatike</h3>
           {!isActive && <p className="text-gray-400">Kamera nuk është aktive.</p>}
-          {isActive && results.length === 0 && <p className="text-gray-400">Pritjet për fytyra...</p>}
+          {isActive && results.length === 0 && (
+            <p className="text-gray-400">Pritjet për fytyra...</p>
+          )}
           {results.map((match, idx) => (
-            <div key={idx} className="bg-gray-700 p-3 rounded mb-2">
+            <div 
+              key={idx} 
+              className="bg-gray-700 p-3 rounded mb-2 cursor-pointer hover:bg-gray-600 transition"
+              onClick={() => goToGallery(match.person_id)}
+            >
               <p className="text-white font-semibold">{match.name}</p>
-              <p className="text-gray-300 text-sm">Ngjashmëria: {(match.similarity * 100).toFixed(2)}%</p>
+              <p className="text-gray-300 text-sm">
+                Ngjashmëria: {(match.similarity * 100).toFixed(2)}%
+              </p>
+              {match.similarity > 0.65 && (
+                <p className="text-yellow-400 text-xs mt-1">⚠️ Ngjashmëri e lartë!</p>
+              )}
             </div>
           ))}
         </div>
@@ -162,8 +231,13 @@ export default function LiveSearch() {
             <p className="text-gray-300">Nuk u gjet asnjë fytyrë e njohur.</p>
           ) : (
             snapshotResult.map((match, idx) => (
-              <div key={idx} className="bg-gray-800 p-2 rounded mt-1">
+              <div 
+                key={idx} 
+                className="bg-gray-800 p-2 rounded mt-1 cursor-pointer hover:bg-gray-700 transition"
+                onClick={() => goToGallery(match.person_id)}
+              >
                 <p className="text-white">{match.name} - {(match.similarity * 100).toFixed(2)}%</p>
+                {match.id_number && <p className="text-gray-400 text-xs">ID: {match.id_number}</p>}
               </div>
             ))
           )}

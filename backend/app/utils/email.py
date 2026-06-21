@@ -26,3 +26,4 @@ def send_alert_email(recipient_email: str, person_name: str, similarity: float, 
             server.send_message(msg)
     except Exception as e:
         print(f"Email error: {e}")
+        

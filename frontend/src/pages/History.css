@@ -1,28 +1,70 @@
+/* History.css - Premium Gold & Black Theme */
+
 .history-page {
-  padding: 100px 20px 20px;
+  padding: 1rem 2rem 2rem 2rem;
   min-height: 100vh;
-  background: #111827;
-  color: white;
+  background: radial-gradient(circle at 10% 20%, #0a0a0a 0%, #1a1a1a 100%);
 }
 
 .history-title {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+  background: linear-gradient(135deg, #ffffff 0%, #ffd700 50%, #ffec80 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  letter-spacing: -0.02em;
 }
 
-/* BOX */
+.history-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 45%;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #ffd700, #ffec80, #ffd700);
+  border-radius: 3px;
+}
+
+/* History Box */
 .history-box {
-  background: #1f2937;
-  padding: 15px;
-  border-radius: 12px;
+  background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+  border-radius: 1.25rem;
+  padding: 0;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  overflow: hidden;
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
 }
 
-/* ITEM */
+.history-box:hover {
+  border-color: rgba(255, 215, 0, 0.4);
+  box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 215, 0, 0.1);
+}
+
+/* History Item */
 .history-item {
-  padding: 10px;
-  border-bottom: 1px solid #374151;
-  transition: 0.2s;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.history-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, #ffd700, #ff8c00);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
 }
 
 .history-item:last-child {
@@ -30,21 +72,123 @@
 }
 
 .history-item:hover {
-  background: #111827;
+  background: rgba(255, 215, 0, 0.05);
+  transform: translateX(5px);
 }
 
-/* TEXT */
+.history-item:hover::before {
+  transform: scaleY(1);
+}
+
+/* History Text */
 .history-text {
-  font-size: 14px;
+  font-size: 1rem;
+  margin: 0 0 0.5rem 0;
+  color: #e2e8f0;
+}
+
+.history-text b {
+  color: #ffd700;
+  font-weight: 700;
 }
 
 .history-time {
-  font-size: 12px;
-  color: #9ca3af;
-  margin-top: 3px;
+  font-size: 0.8rem;
+  color: #888888;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* EMPTY */
+.history-time::before {
+  content: '🕒';
+  font-size: 0.8rem;
+}
+
+/* Empty State */
 .empty {
-  color: #9ca3af;
+  text-align: center;
+  color: #888888;
+  padding: 3rem;
+  font-style: italic;
+  margin: 0;
+  background: rgba(26, 26, 26, 0.5);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffd700;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffec80;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .history-page {
+    padding: 0.75rem 1rem 1.5rem 1rem;
+  }
+  
+  .history-title {
+    font-size: 1.8rem;
+    margin-top: 0.5rem;
+  }
+  
+  .history-title::after {
+    width: 60px;
+    bottom: -8px;
+  }
+  
+  .history-item {
+    padding: 1rem;
+  }
+  
+  .history-text {
+    font-size: 0.9rem;
+  }
+  
+  .history-time {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .history-title {
+    font-size: 1.5rem;
+  }
+  
+  .history-item {
+    padding: 0.75rem;
+  }
+  
+  .history-text {
+    font-size: 0.85rem;
+  }
+}
+
+/* Animation for new items */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.history-item {
+  animation: slideIn 0.3s ease forwards;
 }

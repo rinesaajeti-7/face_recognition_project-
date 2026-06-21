@@ -1,12 +1,14 @@
+// Layout.jsx
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
+import './Layout.css';
 
 export default function Layout() {
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="layout">
       <Navbar />
-      <div className="pt-16">  {/* pt-16 e bën hapësirë që përmbajtja të mos mbulohet nga navbar-i fiks */}
-        <main className="container mx-auto px-4 py-6">
+      <div className="layout-content">
+        <main className="layout-main">
           <Outlet />
         </main>
       </div>

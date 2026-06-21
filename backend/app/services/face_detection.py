@@ -5,3 +5,4 @@ class FaceDetector:
     
     def detect_faces(self, image_bytes: bytes):
         return []
+    

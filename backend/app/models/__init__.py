@@ -1,5 +1,18 @@
-from .user import User
 from .gallery import Gallery
-from .search import Search
+from .user import User
 from .alert import Alert
-from .log import Log
+from .search import Search
+from .log import AuditLog
+from .citizen import Citizen, CitizenReport, Achievement, CitizenChatHistory
+
+__all__ = [
+    "Gallery",
+    "User",
+    "Alert",
+    "Search",
+    "AuditLog",
+    "Citizen",
+    "CitizenReport",
+    "Achievement",
+    "CitizenChatHistory"
+]

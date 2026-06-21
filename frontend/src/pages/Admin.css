@@ -1,84 +1,281 @@
+/* Admin.css - Premium Gold & Black Theme */
+
 .admin-page {
-  padding: 100px 20px 20px;
+  padding: 1rem 2rem 2rem 2rem;
   min-height: 100vh;
-  background: #111827;
-  color: white;
+  background: radial-gradient(circle at 10% 20%, #0a0a0a 0%, #1a1a1a 100%);
 }
 
 .admin-title {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+  background: linear-gradient(135deg, #ffffff 0%, #ffd700 50%, #ffec80 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  letter-spacing: -0.02em;
 }
 
-/* BOX */
+.admin-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 45%;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #ffd700, #ffec80, #ffd700);
+  border-radius: 3px;
+}
+
+/* Admin Box */
 .admin-box {
-  background: #1f2937;
-  border-radius: 12px;
+  background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+  border-radius: 1.25rem;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
 }
 
-/* TABLE */
+.admin-box:hover {
+  border-color: rgba(255, 215, 0, 0.4);
+  box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* Table */
 .admin-table {
   width: 100%;
   border-collapse: collapse;
 }
 
 .admin-table thead {
-  background: #374151;
+  background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+  border-bottom: 2px solid #ffd700;
 }
 
-.admin-table th,
-.admin-table td {
-  padding: 12px;
+.admin-table th {
+  padding: 1rem 1.25rem;
   text-align: left;
-  border-bottom: 1px solid #374151;
-  font-size: 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffd700;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
 }
 
-.admin-table tr:hover {
-  background: #111827;
+.admin-table td {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #e2e8f0;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.08);
 }
 
-/* ROLE BADGES */
+.admin-table tr {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(255, 215, 0, 0.05);
+  transform: translateX(3px);
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Role Badges Premium */
 .role {
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: bold;
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 700;
   text-transform: capitalize;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
 }
 
 .role-admin {
-  background: #dc2626;
+  background: linear-gradient(135deg, #dc2626, #991b1b);
   color: white;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
 }
 
 .role-detective {
-  background: #ca8a04;
-  color: white;
+  background: linear-gradient(135deg, #ffd700, #ff8c00);
+  color: #0a0a0a;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
 }
 
 .role-operator {
-  background: #2563eb;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
   color: white;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
 }
 
-/* SELECT */
+/* Select Dropdown Premium */
 .select {
-  background: #374151;
-  color: white;
-  padding: 6px;
-  border-radius: 6px;
-  border: none;
+  background: #0a0a0a;
+  color: #ffd700;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  border: 1px solid rgba(255, 215, 0, 0.3);
   outline: none;
   cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-/* LOADING */
-.loading {
-  text-align: center;
-  margin-top: 50px;
-  color: white;
+.select:hover {
+  border-color: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+  transform: translateY(-1px);
 }
+
+.select:focus {
+  border-color: #ffd700;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+}
+
+.select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.select option {
+  background: #1a1a1a;
+  color: #e2e8f0;
+}
+
+/* Loading State */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background: radial-gradient(circle at 10% 20%, #0a0a0a 0%, #1a1a1a 100%);
+  color: #ffd700;
+  position: relative;
+}
+
+.loading::after {
+  content: '';
+  width: 30px;
+  height: 30px;
+  margin-left: 15px;
+  border: 3px solid rgba(255, 215, 0, 0.3);
+  border-top-color: #ffd700;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffd700;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffec80;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-page {
+    padding: 0.75rem 1rem 1.5rem 1rem;
+  }
+  
+  .admin-title {
+    font-size: 1.8rem;
+    margin-top: 0.5rem;
+  }
+  
+  .admin-title::after {
+    width: 60px;
+    bottom: -8px;
+  }
+  
+  .admin-table th,
+  .admin-table td {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  .role {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.7rem;
+  }
+  
+  .select {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .admin-title {
+    font-size: 1.5rem;
+  }
+  
+  .admin-table th,
+  .admin-table td {
+    padding: 0.6rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Animation for table rows */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.admin-table tbody tr {
+  animation: fadeInUp 0.3s ease forwards;
+  opacity: 0;
+}
+
+.admin-table tbody tr:nth-child(1) { animation-delay: 0.05s; }
+.admin-table tbody tr:nth-child(2) { animation-delay: 0.1s; }
+.admin-table tbody tr:nth-child(3) { animation-delay: 0.15s; }
+.admin-table tbody tr:nth-child(4) { animation-delay: 0.2s; }
+.admin-table tbody tr:nth-child(5) { animation-delay: 0.25s; }
+.admin-table tbody tr:nth-child(6) { animation-delay: 0.3s; }
+.admin-table tbody tr:nth-child(7) { animation-delay: 0.35s; }
+.admin-table tbody tr:nth-child(8) { animation-delay: 0.4s; }
+.admin-table tbody tr:nth-child(9) { animation-delay: 0.45s; }
+.admin-table tbody tr:nth-child(10) { animation-delay: 0.5s; }

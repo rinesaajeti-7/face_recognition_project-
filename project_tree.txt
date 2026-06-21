@@ -1,0 +1,343 @@
+.
+├── README.md
+├── backend
+│   ├── #
+│   │   ├── bin
+│   │   │   ├── Activate.ps1
+│   │   │   ├── activate
+│   │   │   ├── activate.csh
+│   │   │   ├── activate.fish
+│   │   │   ├── python -> python3.11
+│   │   │   ├── python3 -> python3.11
+│   │   │   └── python3.11 -> /Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11
+│   │   ├── include
+│   │   │   └── python3.11
+│   │   ├── lib
+│   │   │   └── python3.11
+│   │   │       └── site-packages
+│   │   └── pyvenv.cfg
+│   ├── AgeBooth
+│   │   ├── InfiniteYou
+│   │   │   ├── LICENSE
+│   │   │   ├── __init__.py
+│   │   │   ├── pipeline_flux_infusenet.py
+│   │   │   ├── pipeline_infu_flux.py
+│   │   │   ├── resampler.py
+│   │   │   └── test_tools.py
+│   │   ├── PuLID
+│   │   │   ├── eva_clip
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── bpe_simple_vocab_16e6.txt.gz
+│   │   │   │   ├── constants.py
+│   │   │   │   ├── eva_vit_model.py
+│   │   │   │   ├── factory.py
+│   │   │   │   ├── hf_configs.py
+│   │   │   │   ├── hf_model.py
+│   │   │   │   ├── loss.py
+│   │   │   │   ├── model.py
+│   │   │   │   ├── model_configs
+│   │   │   │   │   ├── EVA01-CLIP-B-16.json
+│   │   │   │   │   ├── EVA01-CLIP-g-14-plus.json
+│   │   │   │   │   ├── EVA01-CLIP-g-14.json
+│   │   │   │   │   ├── EVA02-CLIP-B-16.json
+│   │   │   │   │   ├── EVA02-CLIP-L-14-336.json
+│   │   │   │   │   ├── EVA02-CLIP-L-14.json
+│   │   │   │   │   ├── EVA02-CLIP-bigE-14-plus.json
+│   │   │   │   │   └── EVA02-CLIP-bigE-14.json
+│   │   │   │   ├── modified_resnet.py
+│   │   │   │   ├── openai.py
+│   │   │   │   ├── pretrained.py
+│   │   │   │   ├── rope.py
+│   │   │   │   ├── timm_model.py
+│   │   │   │   ├── tokenizer.py
+│   │   │   │   ├── transform.py
+│   │   │   │   ├── transformer.py
+│   │   │   │   └── utils.py
+│   │   │   ├── pipe_diffusers.py
+│   │   │   ├── pipeline_tools.py
+│   │   │   ├── pulid
+│   │   │   │   ├── attention_processor.py
+│   │   │   │   ├── encoders.py
+│   │   │   │   ├── encoders_transformer.py
+│   │   │   │   ├── pipeline.py
+│   │   │   │   ├── pipeline_flux.py
+│   │   │   │   ├── pipeline_v1_1.py
+│   │   │   │   └── utils.py
+│   │   │   └── test_tools.py
+│   │   ├── README.md
+│   │   ├── config_utils.py
+│   │   ├── example_inputs
+│   │   │   ├── hinton.jpeg
+│   │   │   ├── lecun.jpg
+│   │   │   ├── lifeifei.jpg
+│   │   │   ├── liuyifei.png
+│   │   │   ├── pengwei.jpg
+│   │   │   ├── rihanna.webp
+│   │   │   └── zcy.webp
+│   │   ├── inference_lora_interp_traverse_infU.py
+│   │   ├── inference_lora_interp_traverse_infU.sh
+│   │   ├── inference_lora_interp_traverse_pulid.py
+│   │   ├── inference_lora_interp_traverse_pulid.sh
+│   │   ├── outputs
+│   │   ├── pictures
+│   │   │   ├── more_visuals.svg
+│   │   │   ├── more_visuals1.svg
+│   │   │   └── teaser.svg
+│   │   ├── requirements.txt
+│   │   ├── requirements_temp.txt
+│   │   ├── svdlora_pytorch
+│   │   │   ├── __init__.py
+│   │   │   ├── svdlora.py
+│   │   │   └── utils.py
+│   │   ├── train_dreambooth_lora_flux.py
+│   │   ├── train_dreambooth_lora_flux.sh
+│   │   ├── train_dreambooth_lora_sdxl.py
+│   │   └── train_dreambooth_lora_sdxl.sh
+│   ├── ablation_study.py
+│   ├── app
+│   │   ├── __init__.py
+│   │   ├── __pycache__ 2
+│   │   ├── api
+│   │   │   └── admin.py
+│   │   ├── config.py
+│   │   ├── db
+│   │   │   ├── __init__.py
+│   │   │   ├── __pycache__ 2
+│   │   │   ├── database.py
+│   │   │   └── init_db.py
+│   │   ├── dependencies.py
+│   │   ├── main.py
+│   │   ├── models
+│   │   │   ├── __init__.py
+│   │   │   ├── __pycache__ 2
+│   │   │   ├── achievement.py
+│   │   │   ├── alert.py
+│   │   │   ├── citizen.py
+│   │   │   ├── citizen_report.py
+│   │   │   ├── gallery.py
+│   │   │   ├── log.py
+│   │   │   ├── search.py
+│   │   │   └── user.py
+│   │   ├── routers
+│   │   │   ├── __init__.py
+│   │   │   ├── __pycache__ 2
+│   │   │   ├── admin.py
+│   │   │   ├── age_analysis.py
+│   │   │   ├── alerts.py
+│   │   │   ├── auth.py
+│   │   │   ├── chat.py
+│   │   │   ├── citizens.py
+│   │   │   ├── face_analysis.py
+│   │   │   ├── face_comparison_service.py
+│   │   │   ├── gallery.py
+│   │   │   ├── history.py
+│   │   │   ├── map.py
+│   │   │   ├── maps.py
+│   │   │   ├── photo_forensics.py
+│   │   │   ├── profile.py
+│   │   │   ├── qrcodes.py
+│   │   │   ├── reports.py
+│   │   │   ├── search.py
+│   │   │   ├── social.py
+│   │   │   └── websocket.py
+│   │   ├── schemas
+│   │   │   ├── __init__.py
+│   │   │   ├── __pycache__ 2
+│   │   │   ├── citizen.py
+│   │   │   ├── gallery.py
+│   │   │   ├── search.py
+│   │   │   └── user.py
+│   │   ├── services
+│   │   │   ├── __pycache__ 2
+│   │   │   ├── age_gender.py
+│   │   │   ├── age_progression.py
+│   │   │   ├── ai_pipeline.py
+│   │   │   ├── attention.py
+│   │   │   ├── chatbot_service.py
+│   │   │   ├── cohere_chat_service.py
+│   │   │   ├── denoising.py
+│   │   │   ├── face_comparison_service.py
+│   │   │   ├── face_detection.py
+│   │   │   ├── face_plus_service.py
+│   │   │   ├── face_quality.py
+│   │   │   ├── face_recognition.py
+│   │   │   ├── face_service.py
+│   │   │   ├── facepp_client.py
+│   │   │   ├── gamification_service.py
+│   │   │   ├── map_service.py
+│   │   │   ├── matching.py
+│   │   │   ├── occlusion_utils.py
+│   │   │   ├── photo_forensics.py
+│   │   │   ├── qr_service.py
+│   │   │   ├── qrcode_service.py
+│   │   │   ├── report_service.py
+│   │   │   ├── social_service.py
+│   │   │   └── websocket_manager.py
+│   │   ├── socket_events.py
+│   │   └── utils
+│   │       ├── email.py
+│   │       └── logging.py
+│   ├── data
+│   │   ├── citizen_reports
+│   │   │   ├── report_2512195d1a72478aa112ea0350dabebb_elsa copy 2.jpg
+│   │   │   ├── report_40bf4ff295f04060af39f669ec44c5df_Screenshot 2026-06-07 at 20.21.56.png
+│   │   │   ├── report_5587179483b9446584dc8f262ce07c18_elsa copy 2.jpg
+│   │   │   ├── report_591e08d7de0746199e2c8513901f060a_blerina.jpeg
+│   │   │   ├── report_7aa226159c184c8995c7e2be8fc6a42a_blerina.jpeg
+│   │   │   ├── report_cb0344bffc6d4e1e8e7ab50253c5ec1c_IMG_4651.jpeg
+│   │   │   └── report_e0f853fcabad420fa821f334fcf73961_blerina.jpeg
+│   │   ├── embeddings
+│   │   │   └── gallery_encodings.pkl
+│   │   ├── gallery
+│   │   │   ├── blerina_IMG_7805.PNG
+│   │   │   ├── gallery_20_20260613_000628.jpg
+│   │   │   ├── rinesa_IMG_4651.jpeg
+│   │   │   ├── rinesa_IMG_5659.jpg
+│   │   │   ├── rinesa_rinesa.jpg
+│   │   │   ├── roan_IMG_4651.jpeg
+│   │   │   ├── roan_roan2.jpeg
+│   │   │   ├── test1_test.png
+│   │   │   ├── test543_IMG_4651.jpeg
+│   │   │   ├── test_blerina.jpeg
+│   │   │   └── testrinesa_IMG_7805.PNG
+│   │   └── qrcodes
+│   │       ├── person_1.png
+│   │       ├── person_2.png
+│   │       ├── person_4.png
+│   │       └── person_5.png
+│   ├── database
+│   ├── logs
+│   ├── migrate_to_postgres.py
+│   ├── migrations
+│   │   ├── add_citizen_features.py
+│   │   └── add_face_encoding.py
+│   ├── models
+│   │   ├── dncnn
+│   │   │   ├── dncnn_color_25.pth
+│   │   │   └── dncnn_gray_25.pth
+│   │   └── opencv
+│   │       ├── age_deploy.prototxt
+│   │       ├── age_net.caffemodel
+│   │       ├── deploy.prototxt
+│   │       ├── gender_deploy.prototxt
+│   │       ├── gender_net.caffemodel
+│   │       └── res10_300x300_ssd_iter_140000.caffemodel
+│   ├── requirements.txt
+│   ├── requirements_no_dlib.txt
+│   ├── run.py
+│   ├── scripts
+│   │   └── download_dncnn.py
+│   ├── test_face.jpg
+│   ├── test_face_detection.py
+│   └── test_forensics.py
+├── frontend
+│   ├── README.md
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── public
+│   │   ├── favicon.svg
+│   │   └── icons.svg
+│   ├── src
+│   │   ├── App.css
+│   │   ├── App.jsx
+│   │   ├── assets
+│   │   │   ├── hero.png
+│   │   │   ├── react.svg
+│   │   │   └── vite.svg
+│   │   ├── components
+│   │   │   ├── AgeProgression.jsx
+│   │   │   ├── Chat
+│   │   │   │   ├── ChatBot.css
+│   │   │   │   ├── ChatBot.jsx
+│   │   │   │   ├── ChatMessage.jsx
+│   │   │   │   ├── CitizenChatBot.jsx
+│   │   │   │   └── PoliceChatBot.jsx
+│   │   │   ├── CitizenNavbar
+│   │   │   │   ├── CitizenNavbar.css
+│   │   │   │   └── CitizenNavbar.jsx
+│   │   │   ├── Gamification
+│   │   │   │   ├── Badge.jsx
+│   │   │   │   └── Leaderboard.jsx
+│   │   │   ├── Layout
+│   │   │   │   ├── Layout.css
+│   │   │   │   ├── Layout.jsx
+│   │   │   │   ├── Navbar.css
+│   │   │   │   └── Navbar.jsx
+│   │   │   ├── Maps
+│   │   │   │   ├── Heatmap.jsx
+│   │   │   │   └── TimelineMap.jsx
+│   │   │   ├── Notifications
+│   │   │   │   ├── NotificationBell.css
+│   │   │   │   └── NotificationBell.jsx
+│   │   │   └── QRCode.jsx
+│   │   ├── contexts
+│   │   │   ├── SocketContext.jsx
+│   │   │   ├── SocketProvider.jsx
+│   │   │   ├── ThemeContext.jsx
+│   │   │   └── useSocket.js
+│   │   ├── hooks
+│   │   │   └── useWebSocket.js
+│   │   ├── index.css
+│   │   ├── main.jsx
+│   │   ├── pages
+│   │   │   ├── Admin.css
+│   │   │   ├── Admin.jsx
+│   │   │   ├── Alerts.css
+│   │   │   ├── Alerts.jsx
+│   │   │   ├── AlertsLive.jsx
+│   │   │   ├── Chat.css
+│   │   │   ├── Chat.jsx
+│   │   │   ├── Citizen
+│   │   │   │   ├── CitizenCheck.css
+│   │   │   │   ├── CitizenCheck.jsx
+│   │   │   │   ├── CitizenPortal.css
+│   │   │   │   ├── CitizenPortal.jsx
+│   │   │   │   ├── CitizenPublicAlerts.css
+│   │   │   │   ├── CitizenPublicAlerts.jsx
+│   │   │   │   ├── CitizenReport.css
+│   │   │   │   └── CitizenReport.jsx
+│   │   │   ├── Dashboard.css
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Gallery.css
+│   │   │   ├── Gallery.jsx
+│   │   │   ├── History.css
+│   │   │   ├── History.jsx
+│   │   │   ├── Login.css
+│   │   │   ├── Login.jsx
+│   │   │   ├── Map.css
+│   │   │   ├── Map.jsx
+│   │   │   ├── PhotoForensics.css
+│   │   │   ├── PhotoForensics.jsx
+│   │   │   ├── PoliceReports.jsx
+│   │   │   ├── Profile.css
+│   │   │   ├── Profile.jsx
+│   │   │   ├── QRCodes.css
+│   │   │   ├── QRCodes.jsx
+│   │   │   ├── Register.css
+│   │   │   ├── Register.jsx
+│   │   │   ├── Reports.css
+│   │   │   ├── Reports.jsx
+│   │   │   ├── Search.css
+│   │   │   ├── Search.jsx
+│   │   │   ├── SearchLive.jsx
+│   │   │   └── Statistics.jsx
+│   │   ├── services
+│   │   │   ├── adminService.js
+│   │   │   ├── ageProgressionService.js
+│   │   │   ├── ageToolService.js
+│   │   │   ├── alertsService.js
+│   │   │   ├── api.js
+│   │   │   ├── authService.js
+│   │   │   ├── galleryService.js
+│   │   │   ├── pdfService.js
+│   │   │   ├── photoForensicsService.js
+│   │   │   └── searchService.js
+│   │   └── utils
+│   ├── tailwind.config.js
+│   └── vite.config.js
+└── project_tree.txt
+
+62 directories, 279 files

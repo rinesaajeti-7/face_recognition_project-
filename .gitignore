@@ -36,3 +36,38 @@ __pycache__/
 .idea/
 *.swp
 *.swo
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Embeddings dhe të dhëna binare
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+*.joblib
+
+# Media files (foto, video)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.mp4
+*.avi
+*.mov
+
+# Directories with generated data
+data/embeddings/
+data/gallery/
+data/qrcodes/
+data/citizen_reports/
+migrations/
+
+# Logs & temporary
+*.log
+.DS_Store
+.env
+backend/#/

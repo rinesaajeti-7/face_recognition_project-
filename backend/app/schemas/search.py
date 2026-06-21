@@ -25,3 +25,4 @@ class SearchResult(BaseModel):
     is_human: bool = True             # tregon nëse është zbuluar njeri
     message: Optional[str] = None     # p.sh. "Nuk u zbulua asnjë fytyrë njerëzore"
     detected_objects: Optional[List[str]] = None  # lista e objekteve të zbuluara
+    
